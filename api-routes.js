@@ -13,6 +13,7 @@ router.get('/', function (req, res) {
 // Import controllers
 var estudianteController = require('./controllers/estudianteController');
 var cursoController = require('./controllers/cursoController');
+var notaController = require('./controllers/notaController');
 
 // estudiante routes
 router.route('/estudiantes')
@@ -35,6 +36,18 @@ router.route('/cursos/:id')
       .patch(cursoController.update)
       .put(cursoController.update)
       .delete(cursoController.delete);
+
+
+// Nota routes
+router.route('/notas')
+	  .get(notaController.index)
+	  .post(notaController.new);
+
+router.route('/notas/:id')
+	  .get(notaController.view)
+      .patch(notaController.update)
+      .put(notaController.update)
+      .delete(notaController.delete);
 
 // Export API routes
 module.exports = router;
