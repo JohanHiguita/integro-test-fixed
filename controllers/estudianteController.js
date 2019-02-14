@@ -1,5 +1,6 @@
 // Import estudiante model
 Estudiante = require('../models/estudianteModel');
+Nota = require('../models/notaModel');
 // Handle index actions
 exports.index = function (req, res) {
     Estudiante.get(function (err, estudiantes) {
@@ -72,14 +73,25 @@ exports.update = function (req, res) {
 };
 // Handle delete estudiante
 exports.delete = function (req, res) {
+    //delete student
     Estudiante.deleteOne({
         _id: req.params.id
     }, function (err, estudiante) {
+        if (err) {
+            res.send(err);
+        } else {
+
+            res.json({
+                status: "success",
+                message: 'Estudiante eliminado'
+            }); 
+        }
+
+    });
+
+    //delete student's notes (Cascada)
+    Nota.deleteMany({ IdEstudiante: req.params.id}, function (err) {
         if (err)
             res.send(err);
-        res.json({
-            status: "success",
-            message: 'Estudiante eliminado'
-        });
     });
 };

@@ -1,5 +1,7 @@
-// Import curso model
+// Import curso and nota model
 Curso = require('../models/cursoModel');
+Nota = require('../models/notaModel');
+
 // Handle index actions
 exports.index = function (req, res) {
     Curso.get(function (err, cursos) {
@@ -79,5 +81,10 @@ exports.delete = function (req, res) {
             status: "success",
             message: 'Curso y notas asociadas eliminadas'
         });
+    });
+
+    Nota.deleteMany({ IdCurso: req.params.id}, function (err) {
+        if (err)
+            res.send(err);
     });
 };
