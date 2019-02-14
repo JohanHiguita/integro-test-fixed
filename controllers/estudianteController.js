@@ -83,7 +83,7 @@ exports.delete = function (req, res) {
 
             res.json({
                 status: "success",
-                message: 'Estudiante eliminado'
+                message: 'Estudiante y notas asociadas eliminadas'
             }); 
         }
 
