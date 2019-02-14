@@ -88,3 +88,29 @@ exports.delete = function (req, res) {
             res.send(err);
     });
 };
+
+// Handle view curso info
+exports.avgCurso = function (req, res) {
+    const curso_id = req.params.IdCurso;
+
+    // calculate average
+    var sum_grades = 0;
+    var counter = 0;
+    const cursor = Nota.find({IdCurso: curso_id}).cursor();
+    cursor.on('data', function(doc) {
+        counter ++; // how many grades in the course
+        sum_grades += doc.Calificacion;
+    
+    })
+    .on('error', function (err) {
+        console.log(err);
+    }).on('end', function () {
+        var grades_avg = sum_grades / counter;
+        res.status(200).json({
+            status: "success",
+            message: 'Promedio de notas del curso',
+            data: grades_avg
+
+        });
+    })
+};

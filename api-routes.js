@@ -37,6 +37,9 @@ router.route('/cursos/:id')
       .put(cursoController.update)
       .delete(cursoController.delete);
 
+router.route('/promedioCurso/:IdCurso')
+	  .get(cursoController.avgCurso);	
+
 
 // Nota routes
 router.route('/notas')
