@@ -12,6 +12,7 @@ router.get('/', function (req, res) {
 
 // Import controllers
 var estudianteController = require('./controllers/estudianteController');
+var cursoController = require('./controllers/cursoController');
 
 // estudiante routes
 router.route('/estudiantes')
@@ -23,6 +24,17 @@ router.route('/estudiantes/:id')
       .patch(estudianteController.update)
       .put(estudianteController.update)
       .delete(estudianteController.delete);
+
+// curso routes
+router.route('/cursos')
+	  .get(cursoController.index)
+	  .post(cursoController.new);
+
+router.route('/cursos/:id')
+	  .get(cursoController.view)
+      .patch(cursoController.update)
+      .put(cursoController.update)
+      .delete(cursoController.delete);
 
 // Export API routes
 module.exports = router;

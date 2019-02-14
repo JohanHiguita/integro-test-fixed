@@ -72,7 +72,7 @@ exports.update = function (req, res) {
 };
 // Handle delete estudiante
 exports.delete = function (req, res) {
-    Estudiante.remove({
+    Estudiante.deleteOne({
         _id: req.params.id
     }, function (err, estudiante) {
         if (err)
