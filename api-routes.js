@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 });
 
 // Import controllers
-var estudianteController = require('./estudianteController');
+var estudianteController = require('./controllers/estudianteController');
 
 // estudiante routes
 router.route('/estudiantes')

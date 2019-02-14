@@ -1,5 +1,5 @@
 // Import estudiante model
-Estudiante = require('./estudianteModel');
+Estudiante = require('../models/estudianteModel');
 // Handle index actions
 exports.index = function (req, res) {
     Estudiante.get(function (err, estudiantes) {
@@ -25,12 +25,15 @@ exports.new = function (req, res) {
 
     // save the estudiante and check for errors
     estudiante.save(function (err) {
-        // if (err)
-        //     res.json(err);
-        res.json({
-            message: 'Nuevo estudiante creado!',
-            data: estudiante
-        });
+        if (err){
+            res.json(err);
+        }else{
+            res.json({
+                message: 'Nuevo estudiante creado!',
+                data: estudiante
+            });    
+        }
+        
     });
 };
 
@@ -53,15 +56,18 @@ exports.update = function (req, res) {
         estudiante.Nombre = req.body.Nombre ? req.body.Nombre : estudiante.Nombre;
         estudiante.Edad = req.body.Edad;
         
-// save the estudiante and check for errors
-estudiante.save(function (err) {
-    if (err)
-        res.json(err);
-    res.json({
-        message: 'Información de estudiante Actualizada!',
-        data: estudiante
+    // save the estudiante and check for errors
+
+    estudiante.save(function (err) {
+        if (err){
+            res.json(err);
+        }else {
+            res.json({
+                message: 'Información de estudiante Actualizada!',
+                data: estudiante
+            });    
+        }
     });
-});
 });
 };
 // Handle delete estudiante

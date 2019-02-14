@@ -7,7 +7,6 @@ var estudianteSchema = mongoose.Schema({
     },
     Edad: {
         type: Number,
-        required: true
     },
     create_date: {
         type: Date,
