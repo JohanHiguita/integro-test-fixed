@@ -44,10 +44,13 @@ router.route('/notas')
 	  .post(notaController.new);
 
 router.route('/notas/:id')
-	  .get(notaController.view)
+	  .get(notaController.notasEstudiante)
       .patch(notaController.update)
       .put(notaController.update)
       .delete(notaController.delete);
+
+router.route('/notas/show/:id')
+	  .get(notaController.view);	
 
 // Export API routes
 module.exports = router;

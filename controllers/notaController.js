@@ -88,3 +88,24 @@ exports.delete = function (req, res) {
         });
     });
 };
+
+// Notas de un estudiante
+exports.notasEstudiante = function (req, res) {
+    const student_id = req.params.id;
+
+    var grade_numbers = [];
+    const cursor = Nota.find({IdEstudiante: student_id}).cursor();
+    cursor.on('data', function(doc) {
+        grade_numbers.push(doc.Calificacion);
+
+    })
+    .on('error', function (err) {
+        console.log(err);
+    }).on('end', function () {
+        res.status(200).json({
+            status: "success",
+            message: "Recuperación de notas del estudiante",
+            data:grade_numbers
+        });
+    })
+};
